@@ -5,8 +5,41 @@ import './widgets/app_drawer.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+  static const List<Widget> _navOptions = <Widget>[
+    Text(
+      'Index 0: Playlists',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: Albums',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    if (index != 1) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +59,31 @@ class MyApp extends StatelessWidget {
           actions: const [
             Padding(
               padding: EdgeInsets.only(right: 10),
-              child: Icon(Icons.settings),
+              child: Icon(Icons.search_rounded),
             ),
           ],
         ),
         drawer: const AppDrawer(),
-        body: const Text('main body'),
-        // bottomNavigationBar: const BottomBar(),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {},
-        //   child: Icon(Icons.add),
-        // ),
-        bottomNavigationBar: const BottomBar(),
+        body: Center(
+          child: _navOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(3),
           child: FloatingActionButton(
-            // backgroundColor: _currentIndex == 1 ? Colors.blue : Colors.blueGrey,
-            backgroundColor: Colors.pinkAccent,
+            foregroundColor: _selectedIndex == 1 ? Colors.white : Colors.black,
+            backgroundColor:
+                _selectedIndex == 1 ? Colors.pink : Colors.pink.shade300,
             child: const Icon(Icons.home_filled),
-            onPressed: () => {},
-            // setState(() {
-            //   _currentIndex = 1;
-            // }),
+            onPressed: () => {
+              setState(() {
+                _selectedIndex = 1;
+              })
+            },
           ),
         ),
       ),
