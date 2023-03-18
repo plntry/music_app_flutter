@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/widgets/drawer_list.dart';
+
+import './drawer_list.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
