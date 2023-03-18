@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AlbumsPage extends StatelessWidget {
-  const AlbumsPage({super.key});
+class TopPlaylistsPage extends StatelessWidget {
+  const TopPlaylistsPage({super.key});
 
   final playlists = const [
     'Rock Classics',

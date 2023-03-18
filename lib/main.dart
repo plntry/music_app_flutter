@@ -4,7 +4,7 @@ import './widgets/bottom_bar.dart';
 import './widgets/drawer/app_drawer.dart';
 import './widgets/pages/home_page.dart';
 import './widgets/pages/playlists_page.dart';
-import './widgets/pages/albums_page.dart';
+import './widgets/pages/top_playlists_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   static const List<Widget> _navOptions = <Widget>[
     PlaylistsPage(),
     HomePage(),
-    AlbumsPage()
+    TopPlaylistsPage()
   ];
 
   void _onItemTapped(int index) {
