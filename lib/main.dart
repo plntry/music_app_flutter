@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './widgets/bottom_bar.dart';
+import './widgets/app_drawer.dart';
 
 void main() => runApp(const MyApp());
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        // drawer: ,
+        drawer: const AppDrawer(),
         body: const Text('main body'),
         floatingActionButton: FloatingActionButton(
           child: const CircleAvatar(
