@@ -32,19 +32,25 @@ class MyApp extends StatelessWidget {
         ),
         drawer: const AppDrawer(),
         body: const Text('main body'),
-        floatingActionButton: FloatingActionButton(
-          child: const CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.pinkAccent,
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {},
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        // bottomNavigationBar: const BottomBar(),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {},
+        //   child: Icon(Icons.add),
+        // ),
         bottomNavigationBar: const BottomBar(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(3),
+          child: FloatingActionButton(
+            // backgroundColor: _currentIndex == 1 ? Colors.blue : Colors.blueGrey,
+            backgroundColor: Colors.pinkAccent,
+            child: const Icon(Icons.home_filled),
+            onPressed: () => {},
+            // setState(() {
+            //   _currentIndex = 1;
+            // }),
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
     );
