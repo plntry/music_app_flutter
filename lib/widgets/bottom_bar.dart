@@ -48,7 +48,7 @@ class BottomBar extends StatelessWidget {
               icon: Icon(
                 Icons.library_music,
               ),
-              label: 'Albums',
+              label: 'Top playlists',
             )
           ],
         ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import './widgets/bottom_bar.dart';
 import './widgets/app_drawer.dart';
+import './widgets/pages/home_page.dart';
+import './widgets/pages/playlists_page.dart';
+import './widgets/pages/albums_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,24 +16,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
-
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  int _selectedIndex = 1;
 
   static const List<Widget> _navOptions = <Widget>[
-    Text(
-      'Index 0: Playlists',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Albums',
-      style: optionStyle,
-    ),
+    PlaylistsPage(),
+    HomePage(),
+    AlbumsPage()
   ];
 
   void _onItemTapped(int index) {
@@ -64,9 +55,7 @@ class _MyAppState extends State<MyApp> {
           ],
         ),
         drawer: const AppDrawer(),
-        body: Center(
-          child: _navOptions.elementAt(_selectedIndex),
-        ),
+        body: _navOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomBar(
           selectedIndex: _selectedIndex,
           onItemTapped: _onItemTapped,
