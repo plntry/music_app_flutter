@@ -35,11 +35,23 @@ class DrawerList extends StatelessWidget {
       ),
       child: Column(
         children: [
+          const Divider(
+            height: 10,
+            thickness: 1,
+          ),
           ...(listItemProps)
               .map(
-                (item) => DrawerListItem(
-                  iconData: item['icon'] as IconData,
-                  label: item['label'] as String,
+                (item) => Column(
+                  children: [
+                    DrawerListItem(
+                      iconData: item['icon'] as IconData,
+                      label: item['label'] as String,
+                    ),
+                    const Divider(
+                      height: 10,
+                      thickness: 1,
+                    ),
+                  ],
                 ),
               )
               .toList(),

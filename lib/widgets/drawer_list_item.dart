@@ -40,6 +40,5 @@ class DrawerListItem extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
