@@ -16,7 +16,7 @@ class BottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkResponse(
+    return InkWell(
       onTap: () => onItemTapped(currentIndex),
       child: Column(
         children: [
