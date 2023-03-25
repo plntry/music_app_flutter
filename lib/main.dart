@@ -25,11 +25,9 @@ class _MyAppState extends State<MyApp> {
   ];
 
   void _onItemTapped(int index) {
-    if (index != 2) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -68,9 +66,7 @@ class _MyAppState extends State<MyApp> {
                 _selectedIndex == 2 ? Colors.pink : Colors.pink.shade300,
             child: const Icon(Icons.home_filled),
             onPressed: () => {
-              setState(() {
-                _selectedIndex = 2;
-              })
+              _onItemTapped(2),
             },
           ),
         ),
