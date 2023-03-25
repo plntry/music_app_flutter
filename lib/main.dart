@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './widgets/bottom_bar.dart';
+import './widgets/bottomBar/bottom_bar.dart';
 import './widgets/drawer/app_drawer.dart';
 import './widgets/pages/home_page.dart';
 import './widgets/pages/playlists_page.dart';
@@ -20,12 +20,12 @@ class _MyAppState extends State<MyApp> {
 
   static const List<Widget> _navOptions = <Widget>[
     PlaylistsPage(),
+    TopPlaylistsPage(),
     HomePage(),
-    TopPlaylistsPage()
   ];
 
   void _onItemTapped(int index) {
-    if (index != 1) {
+    if (index != 2) {
       setState(() {
         _selectedIndex = index;
       });
@@ -57,20 +57,19 @@ class _MyAppState extends State<MyApp> {
         drawer: const AppDrawer(),
         body: _navOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomBar(
-          selectedIndex: _selectedIndex,
           onItemTapped: _onItemTapped,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(3),
           child: FloatingActionButton(
-            foregroundColor: _selectedIndex == 1 ? Colors.white : Colors.black,
+            foregroundColor: _selectedIndex == 2 ? Colors.white : Colors.black,
             backgroundColor:
-                _selectedIndex == 1 ? Colors.pink : Colors.pink.shade300,
+                _selectedIndex == 2 ? Colors.pink : Colors.pink.shade300,
             child: const Icon(Icons.home_filled),
             onPressed: () => {
               setState(() {
-                _selectedIndex = 1;
+                _selectedIndex = 2;
               })
             },
           ),
