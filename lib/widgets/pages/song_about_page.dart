@@ -42,7 +42,7 @@ class SongAboutPage extends StatelessWidget {
                 top: 30,
               ),
               child: SizedBox(
-                height: 100,
+                height: 160,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
