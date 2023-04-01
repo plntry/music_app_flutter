@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '/models/songs_playlists_model.dart';
+import '/widgets/pages/playlist_songs_page.dart';
 
 class PlaylistsPage extends StatelessWidget {
   const PlaylistsPage({super.key});
 
-  final playlists = const [
-    'я граю в компік не напрягаюсь',
-    'кубожевілля',
-    'sleep radio',
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final playlists = Provider.of<SongsPlaylistsModel>(context).playlists;
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -38,22 +38,44 @@ class PlaylistsPage extends StatelessWidget {
             child: ListView(
               children: [
                 const Divider(
-                  height: 50,
                   thickness: 1,
                 ),
                 ...(playlists)
                     .map((playlist) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              playlist,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
+                            SizedBox(
+                              height: 50,
+                              width: double.infinity,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PlaylistSongsPage(
+                                        songsIds:
+                                            Provider.of<SongsPlaylistsModel>(
+                                                    context)
+                                                .getSongsIdsForPlaylist(
+                                                    playlist['name']),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                style: TextButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  foregroundColor: Colors.pink,
+                                  alignment: Alignment.centerLeft,
+                                ),
+                                child: Text(
+                                  playlist['name'],
+                                ),
                               ),
                             ),
                             const Divider(
-                              height: 50,
                               thickness: 1,
                             ),
                           ],

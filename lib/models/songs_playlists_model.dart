@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SongsPlaylistsModel extends ChangeNotifier {
-  final _songs = const [
+  final List<Map<String, Object>> _songs = [
     {
+      'id': 0,
       'tag': 'nickprospertoday',
       'image': 'nickprosper.jpg',
       'songname': 'Today',
@@ -11,6 +12,7 @@ class SongsPlaylistsModel extends ChangeNotifier {
       'isTopSongOfTheWeek': true,
     },
     {
+      'id': 1,
       'tag': 'hiroyukisawanovogelimkafig',
       'image': 'noimage.jpg',
       'songname': 'Vogel Im Kafig',
@@ -19,14 +21,16 @@ class SongsPlaylistsModel extends ChangeNotifier {
       'isTopSongOfTheWeek': true,
     },
     {
+      'id': 2,
       'tag': 'yvestumormeteorablues',
       'image': 'noimage.jpg',
       'songname': 'Meteora Blues',
       'singer': 'Yves Tumor',
       'duration': '3:48',
-      'isTopSongOfTheWeek': true,
+      'isTopSongOfTheWeek': false,
     },
     {
+      'id': 3,
       'tag': 'snowstrippersyouvedoneitthistime',
       'image': 'snowstrippers.jpg',
       'songname': 'You\'ve Done It This Time',
@@ -35,14 +39,16 @@ class SongsPlaylistsModel extends ChangeNotifier {
       'isTopSongOfTheWeek': true,
     },
     {
+      'id': 4,
       'tag': 'jpegmafiadannybrownsteppapig',
       'image': 'noimage.jpg',
       'songname': 'Steppa Pig',
       'singer': 'JPEGMAFIA, Danny Brown',
       'duration': '3:28',
-      'isTopSongOfTheWeek': true,
+      'isTopSongOfTheWeek': false,
     },
     {
+      'id': 5,
       'tag': 'piercetheveilhellabove',
       'image': 'piercetheveil.jpg',
       'songname': 'Hell Above',
@@ -51,19 +57,56 @@ class SongsPlaylistsModel extends ChangeNotifier {
       'isTopSongOfTheWeek': true,
     },
     {
+      'id': 6,
       'tag': 'jpegmafiadannybrownleanbeefparty',
       'image': 'noimage.jpg',
       'songname': 'Lean Beef Party',
       'singer': 'JPEGMAFIA, Danny Brown',
       'duration': '1:48',
-      'isTopSongOfTheWeek': true,
+      'isTopSongOfTheWeek': false,
     }
   ];
 
-  void addAudioFile(song) {
-    _songs.add(song);
+  final List<Map<String, Object>> _playlists = [
+    {
+      'name': 'я граю в компік не напрягаюсь',
+      'songsIds': [1, 2, 4, 6],
+    },
+    {
+      'name': 'кубожевілля',
+      'songsIds': [1, 3, 5, 6],
+    },
+    {
+      'name': 'sleep radio',
+      'songsIds': [2, 4, 6],
+    },
+  ];
+
+  void addPlaylist(playlist) {
+    _playlists.add(playlist);
     notifyListeners();
   }
+
+  List getSongsIdsForPlaylist(String playlistName) {
+    final playlist = _playlists.firstWhere(
+      (element) => element['name'] == playlistName,
+    );
+
+    return playlist['songsIds'] as List;
+  }
+
+  List<Map<String, Object>> getSongsByIds(List songIds) {
+    List<Map<String, Object>> songs = [];
+
+    for (var songId in songIds) {
+      final song = _songs.firstWhere((element) => element['id'] == songId);
+      songs.add(song);
+    }
+
+    return songs;
+  }
+
+  List get playlists => _playlists;
 
   List get songs => _songs;
 }
