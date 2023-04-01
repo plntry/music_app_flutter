@@ -82,8 +82,14 @@ class SongsPlaylistsModel extends ChangeNotifier {
     },
   ];
 
-  void addPlaylist(playlist) {
+  void addPlaylist(playlistName) {
+    final Map<String, Object> playlist = {
+      'name': playlistName,
+      'songsIds': [],
+    };
+
     _playlists.add(playlist);
+
     notifyListeners();
   }
 

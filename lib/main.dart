@@ -36,10 +36,10 @@ class StartWidget extends StatefulWidget {
 class _MyAppState extends State<StartWidget> {
   int _selectedIndex = 2;
 
-  static const List<Widget> _navOptions = <Widget>[
+  static final List<Widget> _navOptions = <Widget>[
     PlaylistsPage(),
-    TopPlaylistsPage(),
-    HomePage(),
+    const TopPlaylistsPage(),
+    const HomePage(),
   ];
 
   void _onItemTapped(int index) {

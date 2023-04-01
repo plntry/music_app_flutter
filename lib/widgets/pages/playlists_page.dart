@@ -3,9 +3,12 @@ import 'package:provider/provider.dart';
 
 import '/models/songs_playlists_model.dart';
 import '/widgets/pages/playlist_songs_page.dart';
+import '/widgets/addPlaylistModal/add_playlist_modal.dart';
 
 class PlaylistsPage extends StatelessWidget {
-  const PlaylistsPage({super.key});
+  PlaylistsPage({super.key});
+
+  final SongsPlaylistsModel model = SongsPlaylistsModel();
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +21,43 @@ class PlaylistsPage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 20,
-                  bottom: 50,
-                ),
-                child: Text(
-                  'Check your playlists ♫',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
+            children: [
+              SizedBox(
+                height: 150,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Check your playlists ♫',
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (_) {
+                            return AddPlaylistModal(
+                              onSave: (playlistName) {
+                                SongsPlaylistsModel().addPlaylist(playlistName);
+                              },
+                            );
+                          },
+                        ),
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pink,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          )),
+                      child: const Text(
+                        'New playlist',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

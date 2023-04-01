@@ -21,33 +21,40 @@ class PlaylistSongsPage extends StatelessWidget {
       ),
       body: Consumer<SongsPlaylistsModel>(
         builder: (context, model, child) {
-          return ListView(
-            children: [
-              const Divider(
-                height: 2,
-                thickness: 1,
-              ),
-              ...(model.getSongsByIds(songsIds))
-                  .map(
-                    (item) => Column(
-                      children: [
-                        SongListItem(
-                          tag: item['tag'] as String,
-                          image: item['image'] as String,
-                          songname: item['songname'] as String,
-                          singer: item['singer'] as String,
-                          duration: item['duration'] as String,
-                        ),
-                        const Divider(
-                          height: 2,
-                          thickness: 1,
-                        ),
-                      ],
+          return songsIds.isEmpty
+              ? const Center(
+                  child: Text(
+                    'There\'re no songs yet',
+                    style: TextStyle(
+                      fontSize: 18,
                     ),
-                  )
-                  .toList()
-            ],
-          );
+                  ),
+                )
+              : ListView(
+                  children: [
+                    const Divider(
+                      height: 2,
+                      thickness: 1,
+                    ),
+                    ...(model.getSongsByIds(songsIds))
+                        .map((item) => Column(
+                              children: [
+                                SongListItem(
+                                  tag: item['tag'] as String,
+                                  image: item['image'] as String,
+                                  songname: item['songname'] as String,
+                                  singer: item['singer'] as String,
+                                  duration: item['duration'] as String,
+                                ),
+                                const Divider(
+                                  height: 2,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ))
+                        .toList(),
+                  ],
+                );
         },
       ),
     );
