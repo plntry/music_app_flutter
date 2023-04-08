@@ -11,16 +11,16 @@ class ThemeSettingsModel extends ChangeNotifier {
         : _currentTheme = ThemeData.light();
   }
 
-  void toggleTheme() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    if (_currentTheme == ThemeData.light()) {
-      _currentTheme = ThemeData.dark();
-      sharedPreferences.setBool('is_dark', true);
-    } else {
-      _currentTheme = ThemeData.light();
-      sharedPreferences.setBool('is_dark', false);
-    }
-    notifyListeners();
+  void toggleTheme() {
+    SharedPreferences.getInstance().then((sharedPreferences) {
+      if (_currentTheme == ThemeData.light()) {
+        _currentTheme = ThemeData.dark();
+        sharedPreferences.setBool('is_dark', true);
+      } else {
+        _currentTheme = ThemeData.light();
+        sharedPreferences.setBool('is_dark', false);
+      }
+      notifyListeners();
+    });
   }
 }
