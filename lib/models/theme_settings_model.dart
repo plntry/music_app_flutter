@@ -21,6 +21,9 @@ class ThemeSettingsModel extends ChangeNotifier {
         sharedPreferences.setBool('is_dark', false);
       }
       notifyListeners();
+    }).catchError((error) {
+      throw Exception('Failed to get SharedPreferences instance: $error');
     });
+    ;
   }
 }
