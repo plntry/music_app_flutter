@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/theme_settings_model.dart';
 import './drawer_list_item.dart';
+import '/widgets/pages/friends_page.dart';
 
 class DrawerList extends StatelessWidget {
   final BuildContext context;
@@ -14,7 +15,14 @@ class DrawerList extends StatelessWidget {
           {
             'icon': Icons.person_add,
             'label': 'Friends',
-            'onPressedHandler': () {},
+            'onPressedHandler': () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FriendsPage(),
+                ),
+              );
+            },
           },
           {
             'icon': Icons.save,

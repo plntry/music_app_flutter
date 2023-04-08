@@ -24,6 +24,5 @@ class ThemeSettingsModel extends ChangeNotifier {
     }).catchError((error) {
       throw Exception('Failed to get SharedPreferences instance: $error');
     });
-    ;
   }
 }
