@@ -28,7 +28,6 @@ class _AddPlaylistModalState extends State<AddPlaylistModal> {
           horizontal: 16,
           vertical: 10,
         ),
-        color: Colors.pink.shade50,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -43,7 +42,6 @@ class _AddPlaylistModalState extends State<AddPlaylistModal> {
             Form(
               key: _formKey,
               child: TextFormField(
-                // autofocus: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Playlist Name',
