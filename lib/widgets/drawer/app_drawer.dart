@@ -7,9 +7,11 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Drawer(
-      backgroundColor: Color.fromARGB(255, 225, 91, 137),
-      child: DrawerList(),
+    return Drawer(
+      backgroundColor: const Color.fromARGB(255, 225, 91, 137),
+      child: DrawerList(
+        context: context,
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './widgets/bottomBar/bottom_bar.dart';
 import './widgets/drawer/app_drawer.dart';
@@ -7,20 +8,38 @@ import './widgets/pages/home_page.dart';
 import './widgets/pages/playlists_page.dart';
 import './widgets/pages/top_playlists_page.dart';
 import 'models/songs_playlists_model.dart';
+import 'models/theme_settings_model.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final isDark = sharedPreferences.getBool('is_dark') ?? false;
+
+  runApp(MyApp(isDark: isDark));
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isDark;
+  const MyApp({
+    required this.isDark,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SongsPlaylistsModel(),
-      child: const MaterialApp(
-        title: 'MDream',
-        home: StartWidget(),
-        debugShowCheckedModeBanner: false,
+      child: ChangeNotifierProvider(
+        create: (context) => ThemeSettingsModel(isDark),
+        builder: (context, snapshot) {
+          final settings = Provider.of<ThemeSettingsModel>(context);
+          return MaterialApp(
+            title: 'MDream',
+            home: const StartWidget(),
+            debugShowCheckedModeBanner: false,
+            theme: settings.currentTheme,
+          );
+        },
       ),
     );
   }

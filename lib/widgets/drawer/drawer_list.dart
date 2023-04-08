@@ -1,32 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/theme_settings_model.dart';
 import './drawer_list_item.dart';
 
 class DrawerList extends StatelessWidget {
-  const DrawerList({super.key});
+  final BuildContext context;
 
-  final listItemProps = const [
-    {
-      'icon': Icons.person_add,
-      'label': 'Friends',
-    },
-    {
-      'icon': Icons.save,
-      'label': 'Saved Songs',
-    },
-    {
-      'icon': Icons.settings,
-      'label': 'Settings',
-    },
-    {
-      'icon': Icons.person_add_outlined,
-      'label': 'Invite Friends',
-    },
-    {
-      'icon': Icons.question_mark_outlined,
-      'label': 'Q&A',
-    }
-  ];
+  DrawerList({
+    required this.context,
+    Key? key,
+  })  : listItemProps = [
+          {
+            'icon': Icons.person_add,
+            'label': 'Friends',
+            'onPressedHandler': () {},
+          },
+          {
+            'icon': Icons.save,
+            'label': 'Saved Songs',
+            'onPressedHandler': () {},
+          },
+          {
+            'icon': Icons.brightness_4,
+            'label': 'Change theme',
+            'onPressedHandler': () {
+              final settings =
+                  Provider.of<ThemeSettingsModel>(context, listen: false);
+              settings.toggleTheme();
+            },
+          },
+          {
+            'icon': Icons.settings,
+            'label': 'Settings',
+            'onPressedHandler': () {},
+          },
+          {
+            'icon': Icons.person_add_outlined,
+            'label': 'Invite Friends',
+            'onPressedHandler': () {},
+          },
+          {
+            'icon': Icons.question_mark_outlined,
+            'label': 'Q&A',
+            'onPressedHandler': () {},
+          }
+        ],
+        super(key: key);
+
+  final List<Map<String, dynamic>> listItemProps;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +69,7 @@ class DrawerList extends StatelessWidget {
                     DrawerListItem(
                       iconData: item['icon'] as IconData,
                       label: item['label'] as String,
+                      onPressedHandler: item['onPressedHandler'],
                     ),
                     const Divider(
                       height: 10,
