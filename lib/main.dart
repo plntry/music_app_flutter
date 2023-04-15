@@ -27,20 +27,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SongsPlaylistsModel(),
-      child: ChangeNotifierProvider(
-        create: (context) => ThemeSettingsModel(isDark),
-        builder: (context, snapshot) {
-          final settings = Provider.of<ThemeSettingsModel>(context);
-          return MaterialApp(
-            title: 'MDream',
-            home: const StartWidget(),
-            debugShowCheckedModeBanner: false,
-            theme: settings.currentTheme,
-          );
-        },
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SongsPlaylistsModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeSettingsModel(isDark),
+        ),
+      ],
+      builder: (context, child) {
+        final settings = Provider.of<ThemeSettingsModel>(context);
+        return MaterialApp(
+          title: 'MDream',
+          home: const StartWidget(),
+          debugShowCheckedModeBanner: false,
+          theme: settings.currentTheme,
+        );
+      },
     );
   }
 }
