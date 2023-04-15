@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/theme_settings_model.dart';
+import '../../data/models/theme_settings_model.dart';
 import './drawer_list_item.dart';
 import '/widgets/pages/friends_page.dart';
 

@@ -7,8 +7,8 @@ import './widgets/drawer/app_drawer.dart';
 import './widgets/pages/home_page.dart';
 import './widgets/pages/playlists_page.dart';
 import './widgets/pages/top_playlists_page.dart';
-import 'models/songs_playlists_model.dart';
-import 'models/theme_settings_model.dart';
+import 'data/models/songs_playlists_model.dart';
+import 'data/models/theme_settings_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,46 +1,25 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import '../../data/repositories/users_repository.dart';
+import '../../data/models/user_model.dart';
 
 class FriendsPage extends StatefulWidget {
-  const FriendsPage({super.key});
+  const FriendsPage({Key? key}) : super(key: key);
 
   @override
   State<FriendsPage> createState() => _FriendsPageState();
 }
 
 class _FriendsPageState extends State<FriendsPage> {
-  List<dynamic>? usersData;
+  late Future<List<dynamic>> usersData;
 
   @override
   void initState() {
     super.initState();
-    _fetchUsersData();
-  }
-
-  Future<void> _fetchUsersData() async {
-    final response =
-        await http.get(Uri.parse('https://randomuser.me/api/?results=10'));
-    final decodedData = json.decode(response.body);
 
     setState(() {
-      usersData = parseJson(decodedData['results']);
+      usersData = fetchUsersData();
     });
-  }
-
-  List<dynamic> parseJson(List<dynamic> jsonData) {
-    return jsonData.map((user) {
-      final name = user['name'];
-      final picture = user['picture'];
-
-      return {
-        'firstName': name['first'],
-        'lastName': name['last'],
-        'email': user['email'],
-        'thumbnail': picture['thumbnail'],
-        'largePicture': picture['large'],
-      };
-    }).toList();
   }
 
   @override
@@ -50,24 +29,35 @@ class _FriendsPageState extends State<FriendsPage> {
         title: const Text('Friends'),
         backgroundColor: Colors.pink,
       ),
-      body: usersData == null
-          ? const Center(
+      body: FutureBuilder<List<dynamic>>(
+        future: usersData,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
               child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: usersData?.length,
-              itemBuilder: (context, index) {
-                final userData = usersData![index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(userData['thumbnail']),
-                  ),
-                  title:
-                      Text('${userData['firstName']} ${userData['lastName']}'),
-                  subtitle: Text('${userData['email']}'),
-                );
-              },
-            ),
+            );
+          }
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text('An error occurred.'),
+            );
+          }
+          final data = snapshot.data!;
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final userData = data[index] as User;
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(userData.thumbnail),
+                ),
+                title: Text('${userData.firstName} ${userData.lastName}'),
+                subtitle: Text(userData.email),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

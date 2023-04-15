@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/models/songs_playlists_model.dart';
+import '../../data/models/songs_playlists_model.dart';
 import '/widgets/pages/playlist_songs_page.dart';
 import '/widgets/addPlaylistModal/add_playlist_modal.dart';
 

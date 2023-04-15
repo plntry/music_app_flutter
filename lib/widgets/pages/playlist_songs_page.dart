@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/models/songs_playlists_model.dart';
+import '../../data/models/songs_playlists_model.dart';
 import 'package:music_app/widgets/song_list_item.dart';
 
 class PlaylistSongsPage extends StatelessWidget {

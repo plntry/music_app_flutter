@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/songs_playlists_model.dart';
+import '../../data/models/songs_playlists_model.dart';
 
 class AddPlaylistModal extends StatefulWidget {
   final void Function(String playlistName) onSave;
